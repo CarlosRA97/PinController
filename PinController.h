@@ -51,17 +51,17 @@ class PinController {
   public:
     PinController(int eeAddr, int pin);
 
-    // Obtiene el estado del rele leyendolo de la memoria EEPROM
+    // Obtiene el estado del pin leyendolo de la memoria EEPROM
     int GetState();
-    // Establece el estado del rele y lo guarda en la memoria EEPROM
+    // Establece el estado del pin y lo guarda en la memoria EEPROM
     void SetState(int state);
     // Te devuleve el pin que tiene dicho objeto
     int GetPin();
-    // Enciende el rele y establece el estado a HIGH
+    // Enciende el pin y establece el estado a HIGH
     void On();
-    // Apaga el rele y establece el estado a LOW
+    // Apaga el pin y establece el estado a LOW
     void Off();
-    // Cambia el estado del rele desde el que se ha establecido en memoria
+    // Cambia el estado del pin desde el que se ha establecido en memoria
     void Toggle();
 };
 
