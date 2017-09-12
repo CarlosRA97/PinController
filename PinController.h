@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 
+#ifndef PINCONTROLLER_H
+#define PINCONTROLLER_H
+
 class PinController {
   private:
     int pin;
@@ -14,14 +17,15 @@ class PinController {
       setPin(pin);
       seteeAddr(address);
       pinMode(GetPin(), OUTPUT);
-      switch (GetState()) {
-        case LOW:
-          digitalWrite(GetPin(), HIGH);
-          break;
-        case HIGH:
-          digitalWrite(GetPin(), LOW);
-          break;
-      }
+      dWrite();
+      // switch (GetState()) {
+      //   case LOW:
+      //     digitalWrite(GetPin(), HIGH);
+      //     break;
+      //   case HIGH:
+      //     digitalWrite(GetPin(), LOW);
+      //     break;
+      // }
     }
     void seteeAddr(int addr) {
       this->eeAddress = addr;
@@ -41,44 +45,24 @@ class PinController {
     void setPin(int p) {
       this->pin = p;
     }
-  public:
-    PinController(int eeAddr, int pin) {
-      init(eeAddr, pin);
+    void dWrite() {
+      digitalWrite(GetPin(), GetState());
     }
+  public:
+    PinController(int eeAddr, int pin);
 
     // Obtiene el estado del rele leyendolo de la memoria EEPROM
-    int GetState() {
-      return readFromEEPROM();
-    }
+    int GetState();
     // Establece el estado del rele y lo guarda en la memoria EEPROM
-    void SetState(int state) {
-      writeToEEPROM(state);
-    }
+    void SetState(int state);
     // Te devuleve el pin que tiene dicho objeto
-    int GetPin() {
-      return this->pin;
-    }
+    int GetPin();
     // Enciende el rele y establece el estado a HIGH
-    void On() {
-      digitalWrite(GetPin(), LOW);
-      SetState(HIGH);
-    }
+    void On();
     // Apaga el rele y establece el estado a LOW
-    void Off() {
-      digitalWrite(GetPin(), HIGH);
-      SetState(LOW);
-    }
+    void Off();
     // Cambia el estado del rele desde el que se ha establecido en memoria
-    void Toggle() {
-      switch (GetState()) {
-        case LOW:
-          On();
-          break;
-        case HIGH:
-          Off();
-          break;
-        default:
-          break;
-      }
-    }
+    void Toggle();
 };
+
+#endif
