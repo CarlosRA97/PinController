@@ -18,14 +18,6 @@ class PinController {
       seteeAddr(address);
       pinMode(GetPin(), OUTPUT);
       dWrite();
-      // switch (GetState()) {
-      //   case LOW:
-      //     digitalWrite(GetPin(), HIGH);
-      //     break;
-      //   case HIGH:
-      //     digitalWrite(GetPin(), LOW);
-      //     break;
-      // }
     }
     void seteeAddr(int addr) {
       this->eeAddress = addr;
@@ -51,18 +43,13 @@ class PinController {
   public:
     PinController(int eeAddr, int pin);
 
-    // Obtiene el estado del pin leyendolo de la memoria EEPROM
-    int GetState();
-    // Establece el estado del pin y lo guarda en la memoria EEPROM
-    void SetState(int state);
-    // Te devuleve el pin que tiene dicho objeto
-    int GetPin();
-    // Enciende el pin y establece el estado a HIGH
-    void On();
-    // Apaga el pin y establece el estado a LOW
-    void Off();
-    // Cambia el estado del pin desde el que se ha establecido en memoria
-    void Toggle();
+    int GetState();           // Obtiene el estado del pin leyendolo de la memoria EEPROM    
+    void SetState(int state); // Establece el estado del pin y lo guarda en la memoria EEPROM
+    int GetPin();             // Te devuleve el pin que tiene dicho objeto
+    void On();                // Enciende el pin y establece el estado a HIGH
+    void Off();               // Apaga el pin y establece el estado a LOW 
+    void Toggle();            // Cambia el estado del pin desde el que se ha establecido en memoria
+    
 };
 
 #endif
